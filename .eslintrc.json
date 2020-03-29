@@ -1,0 +1,48 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "node": true,
+        "mocha": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "plugins": [
+        "standard",
+        "mocha",
+        "chai-friendly"
+    ],
+    "rules": {
+        "indent": ["warn", 4],
+        "arrow-parens": 1,
+        "new-cap": [
+            2,
+            {
+                "newIsCap": true,
+                "capIsNew": true,
+                "newIsCapExceptions": [],
+                "capIsNewExceptions": []
+            }
+        ]
+    },
+    "overrides": [
+        {
+        "files": [
+            "tests/*.test.js"
+        ],
+        "rules": {
+            "mocha/handle-done-callback": 2,
+            "mocha/no-identical-title": 2,
+            "mocha/no-exclusive-tests": 2,
+            "mocha/no-skipped-tests": 2,
+            "no-unused-expressions": 0,
+            "chai-friendly/no-unused-expressions": 2,
+            "no-new": 0
+        }
+        }
+    ],
+    "globals": {}
+}
