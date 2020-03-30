@@ -80,7 +80,5 @@ SheetParser.prototype.parseLine = function (line) {
         chunks[i].text = (matches[3] !== '') ? matches[3] : undefined
     }
 
-    console.log('chunks:', chunks)
-
     return chunks
 }
