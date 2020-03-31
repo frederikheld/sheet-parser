@@ -6,7 +6,32 @@ const chai = require('chai')
 chai.should()
 const expect = chai.expect
 
-describe('SheetParser.parseLine()', () => {
+/**
+ * This test serves as an example of this function's input and output.
+ * It's kind of an duplicate to the tests below, of which each tests
+ * one specific aspect of the function. But it makes is simpler to
+ * grasp the full concept compared to the detailed tests.
+ */
+describe('SheetParser.parseLine() full example', () => {
+    const sheetParser = new SheetParser()
+
+    const result = sheetParser.parseLine('[C] [G]Jumps o[C]ver the la-[G]aaa[C]zy [Am]dog. [C]')
+
+    result.should.deep.equal([
+        { textRaw: '[C]', chord: 'C', text: undefined },
+        { textRaw: '[G]Jumps', chord: 'G', text: 'Jumps' },
+        { textRaw: 'o', chord: undefined, text: 'o' },
+        { textRaw: '[C]ver', conjoined: true, chord: 'C', text: 'ver' },
+        { textRaw: 'the', chord: undefined, text: 'the' },
+        { textRaw: 'la-', chord: undefined, text: 'la-' },
+        { textRaw: '[G]aaa', conjoined: true, chord: 'G', text: 'aaa' },
+        { textRaw: '[C]zy', conjoined: true, chord: 'C', text: 'zy' },
+        { textRaw: '[Am]dog.', chord: 'Am', text: 'dog.' },
+        { textRaw: '[C]', chord: 'C', text: undefined }
+    ])
+})
+
+describe('SheetParser.parseLine() detailed', () => {
     let sheetParser
 
     beforeEach(() => {
