@@ -27,107 +27,77 @@ describe('function "parseMeta"', () => {
     })
 
     describe('available meta tags', () => {
-        describe('{{artist:value}}', () => {
-            it('can have a value that is anything but curly braces', () => {
-                const testData = [
-                    /* single world */
-                    'Joe', 'John',
+        describe('string tags', () => {
+            /* values that are allowed */
+            const allowedTestData = [
+                /* single world */
+                'Joe', 'John',
 
-                    /* multiple words */
-                    'Joe Cocker',
-                    'Sergeant Pepper\'s loneley Hearts Club Band',
+                /* multiple words */
+                'Joe Cocker',
+                'Sergeant Pepper\'s loneley Hearts Club Band',
 
-                    /* leading and trailing blanks */
-                    'Joe ', ' Joe', ' Joe ',
-                    'Joe Cocker ', ' Joe Cocker', ' Joe Cocker ',
+                /* leading and trailing blanks */
+                'Joe ', ' Joe', ' Joe ',
+                'Joe Cocker ', ' Joe Cocker', ' Joe Cocker ',
 
-                    /* empty value */
-                    '',
+                /* empty value */
+                '',
 
-                    /* special chars */
-                    '![]', '#', '??',
+                /* special chars */
+                '![]', '#', '??',
 
-                    /* special chars that are part of the tag */
-                    ':'
-                    // curly braces are not allowed, see next test!
-                ]
+                /* special chars that are part of the tag */
+                ':'
+                // note that curly braces are not allowed!
+            ]
 
-                for (let i = 0; i < testData.length; i++) {
-                    const result = sheetParser.parseMeta('{{artist:' + testData[i] + '}}')
+            /* values that are not allowed */
+            const notAllowedTestData = [
+                /* curly braces only */
+                '{', '}', '{{', '}}', '{}',
 
-                    result.artist.should.equal(testData[i])
-                }
+                /* curly braces embedded in other characters */
+                '{foo}', 'foo}bar{baz',
+
+                /* nested tags */
+                '{{artist:foo}}', '{{title:foo}}'
+            ]
+
+            describe('{{artist:value}}', () => {
+                it('can have a value that is anything but curly braces', () => {
+                    for (let i = 0; i < allowedTestData.length; i++) {
+                        const result = sheetParser.parseMeta('{{artist:' + allowedTestData[i] + '}}')
+
+                        result.artist.should.equal(allowedTestData[i])
+                    }
+                })
+
+                it('does not set "artist" if the value contains curly braces', () => {
+                    for (let i = 0; i < notAllowedTestData.length; i++) {
+                        const result = sheetParser.parseMeta('{{artist:' + notAllowedTestData[i] + '}}')
+
+                        should.not.exist(result.artist)
+                    }
+                })
             })
 
-            it('does not set "artist" if the value contains curly braces', () => {
-                const testData = [
-                    /* curly braces only */
-                    '{', '}', '{{', '}}', '{}',
+            describe('{{title:value}}', () => {
+                it('can have a value that is anything but curly braces', () => {
+                    for (let i = 0; i < allowedTestData.length; i++) {
+                        const result = sheetParser.parseMeta('{{title:' + allowedTestData[i] + '}}')
 
-                    /* curly braces embedded in other characters */
-                    '{foo}', 'foo}bar{baz',
+                        result.title.should.equal(allowedTestData[i])
+                    }
+                })
 
-                    /* nested tags */
-                    '{{artist:foo}}', '{{title:foo}}'
-                ]
+                it('does not set "title" if the value contains curly braces', () => {
+                    for (let i = 0; i < notAllowedTestData.length; i++) {
+                        const result = sheetParser.parseMeta('{{title:' + notAllowedTestData[i] + '}}')
 
-                for (let i = 0; i < testData.length; i++) {
-                    const result = sheetParser.parseMeta('{{artist:' + testData[i] + '}}')
-
-                    should.not.exist(result.artist)
-                }
-            })
-        })
-
-        describe('{{title:value}}', () => {
-            it('can have a value that is anything but curly braces', () => {
-                const testData = [
-                    /* single world */
-                    'Joe', 'John',
-
-                    /* multiple words */
-                    'Joe Cocker',
-                    'Sergeant Pepper\'s loneley Hearts Club Band',
-
-                    /* leading and trailing blanks */
-                    'Joe ', ' Joe', ' Joe ',
-                    'Joe Cocker ', ' Joe Cocker', ' Joe Cocker ',
-
-                    /* empty value */
-                    '',
-
-                    /* special chars */
-                    '![]', '#', '??',
-
-                    /* special chars that are part of the tag */
-                    ':'
-                    // curly braces are not allowed, see next test!
-                ]
-
-                for (let i = 0; i < testData.length; i++) {
-                    const result = sheetParser.parseMeta('{{title:' + testData[i] + '}}')
-
-                    result.title.should.equal(testData[i])
-                }
-            })
-
-            it('does not set "title" if the value contains curly braces', () => {
-                const testData = [
-                    /* curly braces only */
-                    '{', '}', '{{', '}}', '{}',
-
-                    /* curly braces embedded in other characters */
-                    '{foo}', 'foo}bar{baz',
-
-                    /* nested tags */
-                    '{{artist:foo}}', '{{title:foo}}'
-                ]
-
-                for (let i = 0; i < testData.length; i++) {
-                    const result = sheetParser.parseMeta('{{title:' + testData[i] + '}}')
-
-                    should.not.exist(result.title)
-                }
+                        should.not.exist(result.title)
+                    }
+                })
             })
         })
     })
