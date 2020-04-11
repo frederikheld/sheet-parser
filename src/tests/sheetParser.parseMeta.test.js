@@ -78,5 +78,57 @@ describe('function "parseMeta"', () => {
                 }
             })
         })
+
+        describe('{{title:value}}', () => {
+            it('can have a value that is anything but curly braces', () => {
+                const testData = [
+                    /* single world */
+                    'Joe', 'John',
+
+                    /* multiple words */
+                    'Joe Cocker',
+                    'Sergeant Pepper\'s loneley Hearts Club Band',
+
+                    /* leading and trailing blanks */
+                    'Joe ', ' Joe', ' Joe ',
+                    'Joe Cocker ', ' Joe Cocker', ' Joe Cocker ',
+
+                    /* empty value */
+                    '',
+
+                    /* special chars */
+                    '![]', '#', '??',
+
+                    /* special chars that are part of the tag */
+                    ':'
+                    // curly braces are not allowed, see next test!
+                ]
+
+                for (let i = 0; i < testData.length; i++) {
+                    const result = sheetParser.parseMeta('{{title:' + testData[i] + '}}')
+
+                    result.title.should.equal(testData[i])
+                }
+            })
+
+            it('does not set "title" if the value contains curly braces', () => {
+                const testData = [
+                    /* curly braces only */
+                    '{', '}', '{{', '}}', '{}',
+
+                    /* curly braces embedded in other characters */
+                    '{foo}', 'foo}bar{baz',
+
+                    /* nested tags */
+                    '{{artist:foo}}', '{{title:foo}}'
+                ]
+
+                for (let i = 0; i < testData.length; i++) {
+                    const result = sheetParser.parseMeta('{{title:' + testData[i] + '}}')
+
+                    should.not.exist(result.title)
+                }
+            })
+        })
     })
 })

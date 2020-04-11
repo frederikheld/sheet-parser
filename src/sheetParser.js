@@ -4,14 +4,14 @@ const parseMeta = function (sheetCode) {
     const result = {}
 
     /* {{title:value}} */
-    const titleMatch = sheetCode.match(/\{\{title:(.*?)\}\}/)
+    const titleMatch = sheetCode.match(/\{\{title:(.*)\}\}/)
     if (titleMatch) {
-        // if (
-        //     titleMatch.indexOf('{') === -1 &&
-        //     titleMatch.indexOf('}') === -1
-        // ) {
-        result.title = titleMatch[1]
-        // }
+        if (
+            titleMatch[1].indexOf('{') === -1 &&
+            titleMatch[1].indexOf('}') === -1
+        ) {
+            result.title = titleMatch[1]
+        }
     }
 
     /* {{artist:value}} */
