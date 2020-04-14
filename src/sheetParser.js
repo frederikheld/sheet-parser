@@ -9,41 +9,40 @@ const regExpFactory = function (tagName) {
     return new RegExp('^{{' + tagName + ':(.*)}}$', 'm')
 }
 
+const SheetParser = function (sheetCode) {
+    this.sheetCode = sheetCode
+}
+
+/**
+ * Defines generic characteristics of a meta tag.
+ */
+SheetParser.prototype.parseMetaTag = function (tagName) {
+    const match = this.sheetCode.match(new RegExp('^{{' + tagName + ':(.*)}}$', 'm'))
+
+    if (
+        match &&
+        match[1].indexOf('{') === -1 &&
+        match[1].indexOf('}') === -1
+    ) {
+        return match[1]
+    }
+
+    return undefined
+}
+
 const parseMeta = function (sheetCode) {
+    const sheetParser = new SheetParser(sheetCode)
     const result = {}
 
     /* STRING TAGS */
+    const allowedStringTags = [
+        'artist', 'title', 'album'
+    ]
 
-    /* {{artist:value}} */
-    const artistMatch = sheetCode.match(regExpFactory('artist'))
-    if (artistMatch) {
-        if (
-            artistMatch[1].indexOf('{') === -1 &&
-            artistMatch[1].indexOf('}') === -1
-        ) {
-            result.artist = artistMatch[1]
-        }
-    }
-
-    /* {{title:value}} */
-    const titleMatch = sheetCode.match(regExpFactory('title'))
-    if (titleMatch) {
-        if (
-            titleMatch[1].indexOf('{') === -1 &&
-            titleMatch[1].indexOf('}') === -1
-        ) {
-            result.title = titleMatch[1]
-        }
-    }
-
-    /* {{album:value}} */
-    const albumMatch = sheetCode.match(regExpFactory('album'))
-    if (albumMatch) {
-        if (
-            albumMatch[1].indexOf('{') === -1 &&
-            albumMatch[1].indexOf('}') === -1
-        ) {
-            result.album = albumMatch[1]
+    for (let i = 0; i < allowedStringTags.length; i++) {
+        const value = sheetParser.parseMetaTag(allowedStringTags[i])
+        if (value !== undefined) {
+            result[allowedStringTags[i]] = value
         }
     }
 
@@ -85,3 +84,4 @@ const parseMusic = function (sheetCode) {
 
 module.exports.parseMeta = parseMeta
 module.exports.parseMusic = parseMusic
+module.exports.SheetParser = SheetParser
