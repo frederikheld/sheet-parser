@@ -29,7 +29,9 @@ describe('sheetParser module', () => {
         const parser = new sheetParser.SheetParser()
         const prototypes = Object.getPrototypeOf(parser)
         prototypes.should.have.keys([
-            'parseMetaTag'
+            'parseMetaTag',
+            'parseStringMetaTag',
+            'parseUrlEnabledMetaTag'
         ])
 
         // check if those properties are functions:
