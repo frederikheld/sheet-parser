@@ -1,12 +1,38 @@
 {
-    "editor.renderControlCharacters": true,
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "eslint.format.enable": true,
-    "eslint.workingDirectories": ["./"],
-    "eslint.validate": [
-      "javascript"
+  "editor.renderControlCharacters": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  // Dirk Baeumer's "ESLint" extension:
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": ["./"],
+  "eslint.validate": [
+    "javascript"
+  ],
+  
+  // Holger Benl's "Mocha Test Explorer" extension:
+  "mochaExplorer.files": "src/tests/*.test.js",
+
+  // Emeraldwalk's "Run on Save" extension:
+  "emeraldwalk.runonsave": {
+    "commands": [
+        {
+            "match": "src/(.*/)?.*\\.js$",
+            "isAsync": true,
+            "cmd": "npm run coverage-lcov"
+        }
     ]
+  },
+
+  // Markis Taylor's "Code Coverage" extension:
+  "markiscodecoverage.searchCriteria": "coverage/lcov*.info",
+
+  // Brainfit's "Code Coverage Highlighter" extension:
+  "vscode-coverage-highlighter.files": [
+    "coverage/lcov*.info"
+  ],
+  "vscode-coverage-highlighter.wholeLine": true
+
 }
