@@ -2,10 +2,10 @@
 
 const sheetParser = require('../sheetParser')
 const chai = require('chai')
-const should = chai.should()
+chai.should()
 const expect = chai.expect
 
-describe('SheetParser', () => {
+describe('function SheetParser', () => {
     describe('a meta tag in general [parseMetaTag(\'name\')]', () => {
         it('follows the pattern \'{{name:value}}\'', () => {
             const parser1 = new sheetParser.SheetParser('{{foo:bar}}')
@@ -64,9 +64,9 @@ describe('SheetParser', () => {
         })
 
         it('does return undefined if the value contains curly braces', () => {
-        /* not allowed values */
+            /* not allowed values */
             const notAllowedTestData = [
-            /* curly braces only */
+                /* curly braces only */
                 '{', '}', '{{', '}}', '{}',
 
                 /* curly braces embedded in other characters */
@@ -82,7 +82,7 @@ describe('SheetParser', () => {
             }
         })
 
-        it('mutiple tags can be in the same string, but each tag has to be in a line by itself (no text or other tags in the same line allowed)', () => {
+        it.only('multiple tags can be in the same string, but each tag has to be in a line by itself (no text or other tags in the same line allowed)', () => {
         /* allowed sheet code */
             const parserAllowed1 = new sheetParser.SheetParser('this is some text\n{{artist:foo}}\nthis is more text')
             parserAllowed1.parseMetaTag('artist').should.equal('foo')
@@ -107,7 +107,15 @@ describe('SheetParser', () => {
             expect(parserNotAllowed4.parseMetaTag('artist')).to.be.undefined
         })
 
-        it('has to come before the first line of non-meta content (except for blank lines which come in between meta tags)')
+        it('returns the value of the last occurence if the tag name occurs multiple times in the string', () => {
+            const parser1 = new sheetParser.SheetParser('{{artist:foo}}\n{{artist:bar}}')
+            parser1.parseMetaTag('artist').should.equal('bar')
+
+            const parser2 = new sheetParser.SheetParser('{{artist:foo}}\n{{title:bar}}\n{{artist:baz}}')
+            parser2.parseMetaTag('artist').should.equal('baz')
+        })
+
+        // it('has to come before the first line of non-meta content (except for blank lines which come in between meta tags)')
     })
 
     describe('string meta tags [parseStringMetaTag(\'name\')]', () => {
@@ -186,29 +194,27 @@ describe('SheetParser', () => {
     })
 })
 
-describe('the reference implementation for Freds\'s Songbook\'s file format', () => {
-    describe('parse meta information [function parseMeta()]', () => {
-        it('returns an object that has a field for each parsed tag name', () => {
-            const sheetCode =
-`{{artist:foo}}
-{{title:bar}}`
+// describe('the reference implementation for Freds\'s Songbook\'s file format', () => {
+//     describe('parse meta information [function parseMeta()]', () => {
+//         it('returns an object that has a field for each parsed tag name', () => {
+//             const sheetCode =
+// `{{artist:foo}}
+// {{title:bar}}`
 
-            const result = sheetParser.parseMeta(sheetCode)
+//             const result = sheetParser.parseMeta(sheetCode)
 
-            result.artist.should.be.an('object')
-            result.title.should.be.an('object')
-        })
+//             result.artist.should.be.an('object')
+//             result.title.should.be.an('object')
+//         })
 
-        it('returns the value of the last occurence of a tag if it occurs multiple times')
+//         // describe('string meta tags', () => {
+//         //     it('parses {{artist:value}}', () => {
 
-        describe('string meta tags', () => {
-            it('parses {{artist:value}}', () => {
+//         //     })
+//         // })
 
-            })
-        })
+//         // describe('url-enabled meta tags', () => {
 
-        describe('url-enabled meta tags', () => {
-
-        })
-    })
-})
+//         // })
+//     })
+// })

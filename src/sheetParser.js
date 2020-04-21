@@ -17,8 +17,16 @@ const SheetParser = function (sheetCode) {
  * Defines generic characteristics of a meta tag.
  */
 SheetParser.prototype.parseMetaTag = function (tagName, tagType = undefined) {
-    const match = this.sheetCode.match(new RegExp('^{{' + tagName + ':(.*)}}$', 'm'))
+    // get all matches:
+    const matches = [...this.sheetCode.matchAll(new RegExp('^{{' + tagName + ':(.*)}}$', 'gm'))]
 
+    console.log(matches)
+    console.log(matches.length)
+
+    // use last occurence:
+    const match = matches[matches.length - 1]
+
+    // check if match exists and doesn't contain curly braces:
     if (
         match &&
         match[1].indexOf('{') === -1 &&
