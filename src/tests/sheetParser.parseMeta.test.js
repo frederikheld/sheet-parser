@@ -82,7 +82,7 @@ describe('function SheetParser', () => {
             }
         })
 
-        it.only('multiple tags can be in the same string, but each tag has to be in a line by itself (no text or other tags in the same line allowed)', () => {
+        it('multiple tags can be in the same string, but each tag has to be in a line by itself (no text or other tags in the same line allowed)', () => {
         /* allowed sheet code */
             const parserAllowed1 = new sheetParser.SheetParser('this is some text\n{{artist:foo}}\nthis is more text')
             parserAllowed1.parseMetaTag('artist').should.equal('foo')

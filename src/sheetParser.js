@@ -20,9 +20,6 @@ SheetParser.prototype.parseMetaTag = function (tagName, tagType = undefined) {
     // get all matches:
     const matches = [...this.sheetCode.matchAll(new RegExp('^{{' + tagName + ':(.*)}}$', 'gm'))]
 
-    console.log(matches)
-    console.log(matches.length)
-
     // use last occurence:
     const match = matches[matches.length - 1]
 
