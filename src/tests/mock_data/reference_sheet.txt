@@ -1,0 +1,11 @@
+{{artist:The Artist}}
+{{title:The Song Title}}
+{{album:The Album Title}}
+{{known_from:A Movie or Show Title}}
+{{original_artist:The Original Artist}}
+
+{{year:2001}}
+
+{{source:https://example.com}}
+
+{{listen:https://example.com/listen/here}}
