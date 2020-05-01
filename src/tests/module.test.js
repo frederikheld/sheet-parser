@@ -16,6 +16,8 @@ describe('the interface of the module \'sheetParser\'', () => {
         const parser = new sheetParser.SheetParser()
         const prototypes = Object.getPrototypeOf(parser)
         prototypes.should.have.keys([
+            'parseBlocks',
+            // 'parseLine',
             'parseMetaTag',
             'parseStringMetaTag',
             'parseUrlEnabledMetaTag'
@@ -26,6 +28,7 @@ describe('the interface of the module \'sheetParser\'', () => {
             expect(typeof prototypes[Object.keys(prototypes)[i]]).to.equal('function')
         }
     })
+
     it('exports the function \'parseMeta\' of the reference implementation', () => {
         expect(typeof sheetParser.parseMeta).to.equal('function')
 

@@ -1,5 +1,5 @@
-{{artist:The Artist}}
 {{title:The Song Title}}
+{{artist:The Artist}}
 {{album:The Album Title}}
 {{known_from:A Movie or Show Title}}
 {{original_artist:The Original Artist}}
@@ -7,5 +7,40 @@
 {{year:2001}}
 
 {{source:https://example.com}}
-
 {{listen:https://example.com/listen/here}}
+
+[[intro:]]
+[C] [G] [C] [F]
+[C] [G] [C] [Am] [C]
+
+[[verse1:]]
+Should [C]auld acquaintance [G]be forgot
+And [C]never brought to [F]mind?
+Should [C]auld acquaintance [G]be forgot
+And [C]days of [Am]auld lang [C]syne?
+
+[[chorus:]]
+[F] For [C]auld lang [G]syne, my dear
+[F] For [C]auld lang [F]syne
+We'll [C]take a cup o' [G]kindness yet
+For [C]auld [Am]lang [C]syne.
+
+[[verse2:]]
+And [C]surely you’ll buy [G]your pint cup!
+and [C]surely I’ll buy [F]mine!
+And we'll [C]take a cup of [G]kindness yet,
+for [C]auld [Am]lang [C]syne.
+
+[[chorus]]
+
+[[verse3:]]
+We [C]twa hae paidl'd [G]in the burn
+Frae [C] morning sun till [F]dine
+But [C]seas between us [G]braid hae roar'd
+Sin' [C]auld [Am]lang [C]syne.
+
+[[chorus]]
+
+[[outro:]]
+[F] [C] [G] [F] [C] [F]
+[C] [G] [C] [Am] [C]

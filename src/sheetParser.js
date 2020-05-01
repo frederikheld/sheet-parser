@@ -14,6 +14,30 @@ const SheetParser = function (sheetCode) {
 }
 
 /**
+ *      PARSE MUSIC
+ */
+
+SheetParser.prototype.parseBlocks = function () {
+    const sheetCode = this.sheetCode + '\n\n' // makes sure that block at end of string is matched as well
+    const blocks = sheetCode.matchAll(/\[{2}(.+?):]{2}\n([\S\s\n]*?)\n{2}/g)
+
+    return [...blocks].map(function (value) {
+        return {
+            name: value[1],
+            code: value[2]
+        }
+    })
+}
+
+// SheetParser.prototype.parseLine = function () {
+
+// }
+
+/**
+ *      PARSE META
+ */
+
+/**
  * Defines generic characteristics of a meta tag.
  */
 SheetParser.prototype.parseMetaTag = function (tagName, tagType = undefined) {

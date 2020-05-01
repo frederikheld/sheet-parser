@@ -1,0 +1,48 @@
+{{title:The Song Title}}
+{{artist:The Artist}}
+{{album:The Album Title}}
+{{known_from:A Movie or Show Title}}
+{{original_artist:The Original Artist}}
+
+{{year:1970}}
+
+{{source:https://example.com/}}
+
+{{listen:https://listen.example.com/}}
+
+
+[[intro:]]
+[C] [G] [Am] [Em]
+[F] [C] [F] [G7]
+
+[[verse1:]]
+[C]Lorem [G]ipsum [Am]dolor sit [Em]amet,
+[F]Consec[C]tetur [F]adi[G7]piscit elit.
+[C]Donec [G]pharetra [Am]ex male[Em]suada,
+[F]Finibus [C]nibh at, [F]lacinia [G7]enim.
+
+[[chorus1:]]
+[C]Lorem [G]ipsum [Am]dolor sit [Em]amet,
+[F]Consec[C]tetur [F]adipiscit [G7]elit.
+[C]Donec [G]pharetra [Am]ex male[Em]suada,
+[F]Finibus [C]nibh at, [F]lacinia [G7]enim.
+
+[[verse2:]]
+[C]Lorem [G]ipsum [Am]dolor sit [Em]amet,
+[F]Consec[C]tetur [F]adipiscit [G7]elit.
+[C]Donec [G]pharetra [Am]ex male[Em]suada,
+[F]Finibus [C]nibh at, [F]lacinia [G7]enim.
+
+[[chorus]]
+
+[[verse3:]]
+[C]Lorem [G]ipsum [Am]dolor sit [Em]amet,
+[F]Consec[C]tetur [F]adipiscit [G7]elit.
+[C]Donec [G]pharetra [Am]ex male[Em]suada,
+[F]Finibus [C]nibh at, [F]lacinia [G7]enim.
+
+[[bridge:]]
+[C]Lorem [G]ipsum [Am]dolor sit [Em]amet,
+[F]Consec[C]tetur [F]adipiscit [G7]elit.
+
+[[chorus]]
