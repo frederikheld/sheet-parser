@@ -29,10 +29,6 @@ SheetParser.prototype.parseBlocks = function () {
     })
 }
 
-// SheetParser.prototype.parseLine = function () {
-
-// }
-
 /**
  *      PARSE META
  */
