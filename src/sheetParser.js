@@ -46,7 +46,6 @@ SheetParser.prototype.parseBlocks = function () {
                     x.name === blockObjects[i].name &&
                     x.placeholder !== true
                 ) {
-                    console.log(x)
                     return x
                 }
             }).code

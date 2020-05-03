@@ -106,7 +106,7 @@ This is a verse
                     expect(result[1].placeholder).to.be.undefined
 
                     expect(result[2].placeholder).to.equal(true)
-                    expect(result[2].code).to.be.undefined
+                    expect(result[2].code).to.equal('This is the chorus')
                 })
 
                 it('their field \'code\' will contain the code of the block with the same name', () => {
