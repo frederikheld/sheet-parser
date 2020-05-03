@@ -19,14 +19,41 @@ const SheetParser = function (sheetCode) {
 
 SheetParser.prototype.parseBlocks = function () {
     const sheetCode = this.sheetCode + '\n\n' // makes sure that block at end of string is matched as well
-    const blocks = sheetCode.matchAll(/\[{2}(.+?):]{2}\n([\S\s\n]*?)\n{2}/g)
+    // const blocks = sheetCode.matchAll(/\[{2}(.+?):]{2}\n([\S\s\n]*?)\n{2}/g)
+    const blocksMatches = sheetCode.matchAll(/(\[{2}(.+?):]{2}\n([\S\s]*?)|\[{2}(.+?)]{2})\n{2}/g) // matches block definitions and placeholders
 
-    return [...blocks].map(function (value) {
-        return {
-            name: value[1],
-            code: value[2]
+    // extract relevant information from matches:
+    const blockObjects = [...blocksMatches].map(function (value) {
+        if (value[4]) { // block is a placeholder
+            return {
+                name: value[4],
+                placeholder: true
+            }
+        } else { // block is a block definition
+            return {
+                name: value[2],
+                code: value[3]
+            }
         }
     })
+
+    // replace placeholders by the respective defined block:
+    // TODO: This is a bit inefficient. But as it will mostly be dealing with < 10 blocks, it's not too bad.
+    for (let i = 0; i < blockObjects.length; i++) {
+        if (blockObjects[i].placeholder === true) {
+            blockObjects[i].code = blockObjects.find((x) => {
+                if (
+                    x.name === blockObjects[i].name &&
+                    x.placeholder !== true
+                ) {
+                    console.log(x)
+                    return x
+                }
+            }).code
+        }
+    }
+
+    return blockObjects
 }
 
 /**

@@ -34,7 +34,9 @@ const parseMeta = function (sheetCode) {
 }
 
 const parseMusic = function (sheetCode) {
-    return sheetCode
+    const sheetParser = new SheetParser(sheetCode)
+    const result = sheetParser.parseBlocks()
+    return result
 }
 
 module.exports.parseMeta = parseMeta

@@ -67,4 +67,11 @@ describe('the reference implementation', () => {
             })
         })
     })
+    describe('use parseMusic(\'sheetCode\') to extract text and chords from the sheet code', () => {
+        it('returns a object that represents each block, consisting of lines, which are consisting of chunks of the music in the sheet', () => {
+            const result = sheetParser.parseMusic(sheetCode)
+            result.should.be.an('array')
+            result.length.should.equal(8)
+        })
+    })
 })

@@ -68,29 +68,54 @@ for [C]auld [Am]lang [C]syne.`
                 const parser = new SheetParser(mockCode)
                 const result = parser.parseBlocks()
 
-                // double newline:
+                // double newline terminates:
                 result[0].name.should.equal(expectedResult[0].name)
                 result[1].name.should.equal(expectedResult[1].name)
 
-                // end of string:
+                // end of string terminates:
                 result[2].name.should.equal(expectedResult[2].name)
             })
 
-            it('returns the code of a block as field \'block\'', () => {
+            it('returns the code of a block as field \'code\'', () => {
                 const parser = new SheetParser(mockCode)
                 const result = parser.parseBlocks()
 
-                // double newline:
+                // double newline terminates:
                 result[0].code.should.equal(expectedResult[0].code)
                 result[1].code.should.equal(expectedResult[1].code)
 
-                // end of string:
+                // end of string terminates:
                 result[2].code.should.equal(expectedResult[2].code)
             })
-        })
 
-        describe('parseLine()', () => {
+            describe('block placeholders', () => {
+                const mockCodeWithPlaceholder =
+`[[chorus:]]
+This is the chorus
 
+[[verse1:]]
+This is a verse
+
+[[chorus]]
+`
+                it('block tags without a colon that are surrounded by blank lines are considered placeholders. They will have a field \'placeholder\' which is set to boolean true', () => {
+                    const parser = new SheetParser(mockCodeWithPlaceholder)
+                    const result = parser.parseBlocks()
+
+                    expect(result[0].placeholder).to.be.undefined
+                    expect(result[1].placeholder).to.be.undefined
+
+                    expect(result[2].placeholder).to.equal(true)
+                    expect(result[2].code).to.be.undefined
+                })
+
+                it('their field \'code\' will contain the code of the block with the same name', () => {
+                    const parser = new SheetParser(mockCodeWithPlaceholder)
+                    const result = parser.parseBlocks()
+
+                    result[2].code.should.equal('This is the chorus')
+                })
+            })
         })
     })
 

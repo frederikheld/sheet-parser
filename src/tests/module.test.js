@@ -17,7 +17,6 @@ describe('the interface of the module \'sheetParser\'', () => {
         const prototypes = Object.getPrototypeOf(parser)
         prototypes.should.have.keys([
             'parseBlocks',
-            // 'parseLine',
             'parseMetaTag',
             'parseStringMetaTag',
             'parseUrlEnabledMetaTag'
